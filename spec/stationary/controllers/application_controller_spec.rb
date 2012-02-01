@@ -32,7 +32,7 @@ describe Stationary::ApplicationController do
   context "A missing page" do
 
     pending { should render_template :file => 'site/404' }
-    it { should respond_with(404) }
+    it { should respond_with(:not_found) }
     it { should_not set_the_flash }
 
   end
