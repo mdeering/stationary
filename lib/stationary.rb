@@ -1,5 +1,4 @@
-require "stationary/version"
+require "stationary/engine"
 
 module Stationary
-  # Your code goes here...
 end
