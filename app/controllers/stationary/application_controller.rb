@@ -3,7 +3,7 @@ module Stationary
   class InvalidPath < StandardError; end
   class UnknownTemplate < StandardError; end
 
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
 
     rescue_from InvalidPath, UnknownTemplate, :with => :not_found
 
@@ -17,7 +17,7 @@ module Stationary
       segments.each { |s| path += s }
 
       if template = template_path(path)
-        render :file => template.to_s, :layout => true
+        render :file => template.to_s, :layout => 'application'
       else
         raise UnknownTemplate, "No template for #{path}"
       end
@@ -44,7 +44,7 @@ module Stationary
       # with different versions of rails.  The path param already comes in as an array
       # with older versions of rails using the same route.
       def url_path
-      @path ||= params[:path].present? ? params[:path].split('/') : []
+        @path ||= params[:path].present? ? params[:path].split('/') : []
       end
 
       def not_found
