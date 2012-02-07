@@ -5,6 +5,8 @@ module Stationary
 
   class ApplicationController < ::ApplicationController
 
+    skip_before_filter Stationary.configuration.skip_before_filter
+
     rescue_from InvalidPath, UnknownTemplate, :with => :not_found
 
     def show
@@ -13,7 +15,7 @@ module Stationary
         raise InvalidPath, "Path contains invalid characters #{url_path}"
       end
 
-      path = Pathname.new("#{Rails.root}/app/views/stationary")
+      path = Pathname.new(Stationary.configuration.root)
       segments.each { |s| path += s }
 
       if template = template_path(path)
