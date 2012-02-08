@@ -3,7 +3,7 @@ module Stationary
     class InstallGenerator < Rails::Generators::Base
    
       def create_initializer_file
-        create_file "config/initializers/stationary_config.rb" do <<-TXT
+        create_file "config/initializers/stationary.rb" do <<-TXT
 # The example below shows how to configure Stationary to allow public
 # access to the pages behind devise and also set the root directory for
 # Stationary to look for template files.
