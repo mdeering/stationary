@@ -5,6 +5,8 @@ module Stationary
 
   class ApplicationController < ::ApplicationController
 
+    layout :set_layout 
+
     Stationary.configuration.skip_before_filter.each do |filter|
       skip_before_filter filter
     end
@@ -21,7 +23,7 @@ module Stationary
       segments.each { |s| path += s }
 
       if template = template_path(path)
-        render :file => template.to_s, :layout => 'application'
+        render :file => template.to_s
       else
         raise UnknownTemplate, "No template for #{path}"
       end
@@ -29,16 +31,20 @@ module Stationary
 
     private
 
+      def set_layout
+        params[:stationary_layout] || Stationary.configuration.layout
+      end
+
       # First we will look if the path is a directory with an index template inside of ti
       # if not then we will look for a template by the name of the last segment of the url
       # using all of the template types that we have registred below.
       def template_path(path)
         # Add a new template extension here if we need to.
         [ 'haml', 'erb' ].each do |template_extension|
-          if path.directory? && (index = path + "index.html.#{template_extension}").file?
-            return index
-          elsif (file = path.dirname + (path.basename.to_s + ".html.#{template_extension}")).file?
-            return file
+          if path.directory? && (path + "index.html.#{template_extension}").file?
+            return "#{path}/index"
+          elsif (path.dirname + (path.basename.to_s + ".html.#{template_extension}")).file?
+            return path.dirname + path.basename.to_s
           end
         end
         nil

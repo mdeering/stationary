@@ -15,11 +15,12 @@ module Stationary
 
   class Configuration
 
-    attr_accessor :skip_before_filter, :root
+    attr_accessor :layout, :skip_before_filter, :root
 
     def initialize
+      @layout             = 'application'
       @skip_before_filter = []
-      @root = "#{Rails.root}/app/views/stationary"
+      @root               = "#{Rails.root}/app/views/stationary"
     end
 
     def skip_before_filter=(filters)
