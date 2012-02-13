@@ -5,7 +5,9 @@ module Stationary
 
   class ApplicationController < ::ApplicationController
 
-    skip_before_filter Stationary.configuration.skip_before_filter
+    Stationary.configuration.skip_before_filter.each do |filter|
+      skip_before_filter filter
+    end
 
     rescue_from InvalidPath, UnknownTemplate, :with => :not_found
 
@@ -50,7 +52,7 @@ module Stationary
       end
 
       def not_found
-        render :text => "#{params[:path]}", :status => :not_found
+        raise ActionController::RoutingError.new "No route matches [#{request.request_method}] \"/#{params[:path]}\""
       end
 
   end
