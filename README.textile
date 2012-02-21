@@ -6,7 +6,7 @@ h2. Installation
 
 p. Add the line below to your rails applciation Gemfile.  _This gem has only been tested with Rails 3.2 and Ruby 1.9.3 so far._
 
-<pre><code>gem 'stationary', '0.0.1.pre'</code></pre>
+<pre><code>gem 'stationary'</code></pre>
 
 p. After updating you gem set you can run the following to install the stationary at the root of your application.
 
