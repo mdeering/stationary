@@ -1,3 +1,29 @@
 h1. Stationary
 
 p. This project rocks and uses MIT-LICENSE.
+
+h2. Installation
+
+p. Add the line below to your rails applciation Gemfile.  _This gem has only been tested with Rails 3.2 and Ruby 1.9.3 so far._
+
+<pre><code>gem 'stationary', '0.0.1.pre'</code></pre>
+
+p. After updating you gem set you can run the following to install the stationary at the root of your application.
+
+<pre><code>rails g stationary:install</code></pre>
+
+p. The install generator will add the engine routes into your applications _config/routes.rb_ and also create a initializer file _config/initializers/stationary.rb_ that shows some of the common configuraiton points for the engine.
+
+h2. Configuration
+
+<pre><code># config/initializers/stationary.rb
+#Stationary.configure do |config|
+#  config.root               = "#{Rails.root}/app/views/site"
+#  config.skip_before_fil</code></pre>
+
+h2. Contributing
+
+* Fork
+* Add Failing/Feature Spec
+* Add code to make Spec pass
+* Send Pull Request
